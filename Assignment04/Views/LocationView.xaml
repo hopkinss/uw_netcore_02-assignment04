@@ -1,0 +1,112 @@
+﻿<UserControl
+    x:Class="Assignment04.Views.LocationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:Assignment04.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Assignment04.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <AlternationConverter x:Key="BackgroundConverter">
+            <SolidColorBrush>White</SolidColorBrush>
+            <SolidColorBrush>AliceBlue</SolidColorBrush>
+        </AlternationConverter>
+        <Style x:Key="alternatingWithBinding" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource BackgroundConverter}}" />
+        </Style>
+        <converter:IsListVisibleConverter x:Key="IsListVisibleConverter" />
+    </UserControl.Resources>
+    <GroupBox Grid.Row="1" Height="310">
+        <GroupBox.Header>
+            <TextBlock Text="Location details" />
+        </GroupBox.Header>
+        <StackPanel Orientation="Horizontal">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="1"
+                    Margin="5,0,10,0"
+                    Content="{Binding CountryCode, UpdateSourceTrigger=PropertyChanged}"
+                    ContentStringFormat="Country: {0}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5,0,10,0"
+                    Content="{Binding State, UpdateSourceTrigger=PropertyChanged}"
+                    ContentStringFormat="State/Province: {0}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="5,0,10,0"
+                    Content="{Binding City, UpdateSourceTrigger=PropertyChanged}"
+                    ContentStringFormat="City: {0}" />
+
+                <ListView
+                    
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="200"
+                    MinHeight="25"
+                    MaxHeight="250"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    AlternationCount="2"
+                    
+                    BorderBrush="MidnightBlue"
+                    IsEnabled="False"
+                    ItemContainerStyle="{StaticResource alternatingWithBinding}"
+                    ItemsSource="{Binding SelectedStates}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding State}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView
+                    MinHeight="25"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Width="200"
+                    MaxHeight="250"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    AlternationCount="2"
+                    BorderBrush="MidnightBlue"
+                    IsEnabled="False"
+                    ItemContainerStyle="{StaticResource alternatingWithBinding}"
+                    ItemsSource="{Binding SelectedCities}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding City}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+
+        </StackPanel>
+    </GroupBox>
+</UserControl>

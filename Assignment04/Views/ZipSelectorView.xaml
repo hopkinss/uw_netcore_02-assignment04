@@ -1,0 +1,70 @@
+﻿<UserControl
+    x:Class="Assignment04.Views.ZipSelectorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:Assignment04.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:gif="http://wpfanimatedgif.codeplex.com"
+    xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Assignment04.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <AlternationConverter x:Key="BackgroundConverter">
+            <SolidColorBrush>White</SolidColorBrush>
+            <SolidColorBrush>AliceBlue</SolidColorBrush>
+        </AlternationConverter>
+        <Style x:Key="alternatingWithBinding" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource BackgroundConverter}}" />
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="BorderBrush" Value="MediumBlue" />
+            <Setter Property="BorderThickness" Value=".5" />
+            <Setter Property="Background" Value="AliceBlue" />
+            <Setter Property="Padding" Value="3" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <converter:IsVisibleConverter x:Key="IsVisibleConverter" />
+    </UserControl.Resources>
+    <StackPanel
+        Margin="10,20"
+        VerticalAlignment="Top"
+        Orientation="Horizontal">
+        <Label Content="Zip Code" />
+        <TextBox
+            Width="100"
+            Height="25"
+            CharacterCasing="Upper"
+            Text="{Binding Zip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" />
+        <Button
+            IsEnabled="{Binding IsValidZip,UpdateSourceTrigger=PropertyChanged}"
+            Width="80"
+            Height="25"
+            Margin="5,0,0,0"
+            Background="AliceBlue"
+            BorderBrush="Blue"
+            Command="{Binding SubmitCommand}"
+            Foreground="MediumBlue">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <icons:PackIconRemixIcon Kind="MailSendLine" />
+                    <TextBlock Margin="10,0,0,0" Text="Submit" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <Image
+            Height="25"
+            HorizontalAlignment="Right"
+            gif:ImageBehavior.AnimatedSource="/Resource/circle-arrow.gif"
+            Stretch="Uniform"
+            Visibility="{Binding IsWorking, Converter={StaticResource IsVisibleConverter}}" />
+    </StackPanel>
+</UserControl>

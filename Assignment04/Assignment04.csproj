@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>w.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <Page Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\zip.csv" />
+    <None Remove="Resource\circle-arrow.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\zip.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\circle-arrow.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.RemixIcon" Version="4.8.0" />
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>
