@@ -58,7 +58,6 @@
                     ContentStringFormat="City: {0}" />
 
                 <ListView
-                    
                     Grid.Row="2"
                     Grid.Column="1"
                     Width="200"
@@ -68,9 +67,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     AlternationCount="2"
-                    
                     BorderBrush="MidnightBlue"
-                    IsEnabled="False"
                     ItemContainerStyle="{StaticResource alternatingWithBinding}"
                     ItemsSource="{Binding SelectedStates}">
                     <ListView.ItemTemplate>
@@ -83,17 +80,16 @@
                 </ListView>
 
                 <ListView
-                    MinHeight="25"
                     Grid.Row="2"
                     Grid.Column="2"
                     Width="200"
+                    MinHeight="25"
                     MaxHeight="250"
                     Margin="10"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     AlternationCount="2"
                     BorderBrush="MidnightBlue"
-                    IsEnabled="False"
                     ItemContainerStyle="{StaticResource alternatingWithBinding}"
                     ItemsSource="{Binding SelectedCities}">
                     <ListView.ItemTemplate>
