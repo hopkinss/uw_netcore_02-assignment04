@@ -252,6 +252,7 @@ namespace Assignment04.ViewModel
                     {
                         State = "Unknown";
                         City = "Unknown";
+                        SelectedCities.Clear();
                     }
                     IsWorking = false;
                 }
