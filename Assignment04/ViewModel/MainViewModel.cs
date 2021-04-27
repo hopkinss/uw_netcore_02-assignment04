@@ -186,7 +186,7 @@ namespace Assignment04.ViewModel
                         {
                             if (Zip.Length < 5)
                             {
-                                AddError(propertyName, $"US zip codes must have least 5 digits");
+                                AddError(propertyName, $"US zip codes must have at least 5 digits");
                             }
                             else
                             {
